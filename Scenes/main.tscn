@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtapwlv0uet0a"]
+
+[ext_resource type="Texture2D" uid="uid://bdreujlyd6lhl" path="res://Assets/background.jpg" id="1_7a1qm"]
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_o5ruw"]
+[ext_resource type="PackedScene" uid="uid://x1k2phgovfhc" path="res://Scenes/grid.tscn" id="2_hiac0"]
+[ext_resource type="PackedScene" uid="uid://dw60hx1uwwuko" path="res://Scenes/local_player.tscn" id="3_pwbqm"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_o5ruw")
+
+[node name="main_camera" type="Camera2D" parent="."]
+
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("1_7a1qm")
+
+[node name="Grid" parent="." instance=ExtResource("2_hiac0")]
+position = Vector2(0, 100)
+
+[node name="LocalPlayer_X" parent="." instance=ExtResource("3_pwbqm")]
+offset_left = -168.0
+offset_top = -368.0
+offset_right = -93.0
+offset_bottom = -290.0
+text = "X"
+
+[node name="LocalPlayer_O" parent="." instance=ExtResource("3_pwbqm")]
+offset_left = 120.0
+offset_top = -368.0
+offset_right = 195.0
+offset_bottom = -290.0
+text = "O"

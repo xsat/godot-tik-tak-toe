@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgs7e0m7214lo"]
+
+[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="1_oubrj"]
+[ext_resource type="Script" path="res://Scenes/mark.gd" id="2_1ww52"]
+
+[sub_resource type="Theme" id="Theme_i1fb0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkost"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rinae"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6myfl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1e7x6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bcr7t"]
+
+[node name="Mark" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme = SubResource("Theme_i1fb0")
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 0)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 0)
+theme_override_fonts/font = ExtResource("1_oubrj")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nkost")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_rinae")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6myfl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1e7x6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bcr7t")
+text = "~"
+script = ExtResource("2_1ww52")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
