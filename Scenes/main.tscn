@@ -1,105 +1,78 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtapwlv0uet0a"]
+[gd_scene load_steps=7 format=3 uid="uid://dtapwlv0uet0a"]
 
 [ext_resource type="Texture2D" uid="uid://bdreujlyd6lhl" path="res://Assets/background.jpg" id="1_7a1qm"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_o5ruw"]
 [ext_resource type="PackedScene" uid="uid://dw60hx1uwwuko" path="res://Scenes/local_player.tscn" id="3_pwbqm"]
-[ext_resource type="PackedScene" uid="uid://cgs7e0m7214lo" path="res://Scenes/mark.tscn" id="4_fu44m"]
+[ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="4_fu44m"]
 [ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="5_7so0w"]
+[ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="6_0dqct"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_o5ruw")
 
 [node name="main_camera" type="Camera2D" parent="."]
 
-[node name="background" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="main_camera"]
 texture = ExtResource("1_7a1qm")
 
-[node name="LocalPlayer_X" parent="." instance=ExtResource("3_pwbqm")]
-offset_left = -168.0
-offset_top = -368.0
-offset_right = -93.0
-offset_bottom = -290.0
-text = "X"
+[node name="LocalPlayers" type="Node" parent="."]
 
-[node name="LocalPlayer_O" parent="." instance=ExtResource("3_pwbqm")]
+[node name="LocalPlayer_O" parent="LocalPlayers" instance=ExtResource("3_pwbqm")]
 offset_left = 120.0
 offset_top = -368.0
 offset_right = 195.0
 offset_bottom = -290.0
 text = "O"
 
+[node name="LocalPlayer_X" parent="LocalPlayers" instance=ExtResource("3_pwbqm")]
+offset_left = -168.0
+offset_top = -368.0
+offset_right = -93.0
+offset_bottom = -290.0
+text = "X"
+
 [node name="Grid" type="Sprite2D" parent="."]
 texture = ExtResource("5_7so0w")
 offset = Vector2(0, 100)
 
+[node name="Mark_0_0" parent="Grid" instance=ExtResource("4_fu44m")]
+position = Vector2(-176, -72)
+
+[node name="Mark_0_1" parent="Grid" instance=ExtResource("4_fu44m")]
+position = Vector2(-48, -72)
+y = 1
+
+[node name="Mark_0_2" parent="Grid" instance=ExtResource("4_fu44m")]
+position = Vector2(88, -72)
+y = 2
+
+[node name="Mark_1_0" parent="Grid" instance=ExtResource("4_fu44m")]
+position = Vector2(-176, 48)
+x = 1
+
 [node name="Mark_1_1" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = -168.0
-offset_top = -60.0
-offset_right = -68.0
-offset_bottom = 40.0
+position = Vector2(-48, 48)
 x = 1
 y = 1
 
 [node name="Mark_1_2" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = -40.0
-offset_top = -60.0
-offset_right = 60.0
-offset_bottom = 40.0
+position = Vector2(88, 48)
 x = 1
 y = 2
 
-[node name="Mark_1_3" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = 96.0
-offset_top = -68.0
-offset_right = 196.0
-offset_bottom = 32.0
-x = 1
-y = 3
+[node name="Mark_2_0" parent="Grid" instance=ExtResource("4_fu44m")]
+position = Vector2(-176, 168)
+x = 2
 
 [node name="Mark_2_1" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = -168.0
-offset_top = 60.0
-offset_right = -68.0
-offset_bottom = 160.0
+position = Vector2(-48, 168)
 x = 2
 y = 1
 
 [node name="Mark_2_2" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = -40.0
-offset_top = 60.0
-offset_right = 60.0
-offset_bottom = 160.0
+position = Vector2(88, 168)
 x = 2
 y = 2
 
-[node name="Mark_2_3" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = 96.0
-offset_top = 60.0
-offset_right = 196.0
-offset_bottom = 160.0
-x = 2
-y = 3
-
-[node name="Mark_3_1" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = -168.0
-offset_top = 180.0
-offset_right = -68.0
-offset_bottom = 280.0
-x = 3
-y = 1
-
-[node name="Mark_3_2" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = -40.0
-offset_top = 180.0
-offset_right = 60.0
-offset_bottom = 280.0
-x = 3
-y = 2
-
-[node name="Mark_3_3" parent="Grid" instance=ExtResource("4_fu44m")]
-offset_left = 96.0
-offset_top = 180.0
-offset_right = 196.0
-offset_bottom = 280.0
-x = 3
-y = 3
+[node name="MatchLine" parent="." instance=ExtResource("6_0dqct")]
+visible = false
