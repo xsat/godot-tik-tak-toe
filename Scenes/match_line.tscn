@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bldf64kgx1myf"]
+[gd_scene load_steps=3 format=3 uid="uid://bldf64kgx1myf"]
 
 [ext_resource type="Texture2D" uid="uid://b3vitl41bbk4o" path="res://Assets/match_line.png" id="1_45xil"]
+[ext_resource type="Script" path="res://Scenes/match_line.gd" id="1_bcp2w"]
 
 [node name="MatchLine" type="Node2D"]
+script = ExtResource("1_bcp2w")
 
 [node name="backgroud" type="Sprite2D" parent="."]
 texture = ExtResource("1_45xil")

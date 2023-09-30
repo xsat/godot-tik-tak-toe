@@ -15,6 +15,15 @@ class_name Main
 @onready var mark_2_1: Mark = $Grid/Mark_2_1 as Mark
 @onready var mark_2_2: Mark = $Grid/Mark_2_2 as Mark
 
+@onready var match_line_first_horizontal: MatchLine = $MatchLines/MatchLine_First_Horizontal as MatchLine
+@onready var match_line_second_horizontal: MatchLine = $MatchLines/MatchLine_Second_Horizontal as MatchLine
+@onready var match_line_third_horizontal: MatchLine = $MatchLines/MatchLine_Third_Horizontal as MatchLine
+@onready var match_line_first_vertical: MatchLine = $MatchLines/MatchLine_First_Vertical as MatchLine
+@onready var match_line_second_vertical: MatchLine = $MatchLines/MatchLine_Second_Vertical as MatchLine
+@onready var match_line_third_vertical: MatchLine = $MatchLines/MatchLine_Third_Vertical as MatchLine
+@onready var match_line_falling_diagonal: MatchLine = $MatchLines/MatchLine_Falling_Diagonal as MatchLine
+@onready var match_line_rising_diagonal: MatchLine = $MatchLines/MatchLine_Rising_Diagonal as MatchLine
+
 const NONE_WIN_POSITION: int = 0
 const FIRST_HORIZONTAL_WIN_POSITION: int = 1
 const SECOND_HORIZONTAL_WIN_POSITION: int = 2
@@ -50,8 +59,22 @@ func _on_mark_pressed(mark: Mark) -> void:
 	var last_win_position: int = _get_player_win_positiion();
 	if last_win_position == NONE_WIN_POSITION:
 		_change_active_player()
-	else:
-		print('win')
+	elif last_win_position == FIRST_HORIZONTAL_WIN_POSITION:
+		match_line_first_horizontal.visible = true
+	elif last_win_position == SECOND_HORIZONTAL_WIN_POSITION:
+		match_line_second_horizontal.visible = true
+	elif last_win_position == THIRD_HORIZONTAL_WIN_POSITION:
+		match_line_third_horizontal.visible = true
+	elif last_win_position == FISRT_VERTICAL_WIN_POSITION:
+		match_line_first_vertical.visible = true
+	elif last_win_position == SECOND_VERTICALL_WIN_POSITION:
+		match_line_second_vertical.visible = true
+	elif last_win_position == THIRD_VERTICAL_WIN_POSITION:
+		match_line_third_vertical.visible = true
+	elif last_win_position == FALLING_DIAGONAL_WIN_POSITION:
+		match_line_falling_diagonal.visible = true
+	elif last_win_position == RISING_DIAGONAL_WIN_POSITION:
+		match_line_rising_diagonal.visible = true
 	
 func _change_active_player() -> void:
 	if player_value == local_player_x.text:

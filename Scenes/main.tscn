@@ -74,5 +74,41 @@ position = Vector2(88, 168)
 x = 2
 y = 2
 
-[node name="MatchLine" parent="." instance=ExtResource("6_0dqct")]
+[node name="MatchLines" type="Node2D" parent="."]
+
+[node name="MatchLine_First_Horizontal" parent="MatchLines" instance=ExtResource("6_0dqct")]
 visible = false
+position = Vector2(0, -8)
+
+[node name="MatchLine_Second_Horizontal" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(0, 96)
+
+[node name="MatchLine_Third_Horizontal" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(8, 208)
+
+[node name="MatchLine_First_Vertical" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(-120, 112)
+rotation = 1.5708
+
+[node name="MatchLine_Second_Vertical" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(8, 120)
+rotation = 1.5708
+
+[node name="MatchLine_Third_Vertical" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(144, 112)
+rotation = 1.5708
+
+[node name="MatchLine_Falling_Diagonal" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(16, 104)
+rotation = 0.785398
+
+[node name="MatchLine_Rising_Diagonal" parent="MatchLines" instance=ExtResource("6_0dqct")]
+visible = false
+position = Vector2(-3.8147e-06, 112)
+rotation = 2.35619
