@@ -2,8 +2,8 @@ extends Node
 
 class_name Main
 
-@onready var local_player_x: LocalPlayer = $LocalPlayers/LocalPlayer_X as LocalPlayer
-@onready var local_player_o: LocalPlayer = $LocalPlayers/LocalPlayer_O as LocalPlayer
+@onready var scored_player_x: ScoredPlayer = $ScoredPlayers/ScoredPlayer_X as ScoredPlayer
+@onready var scored_player_o: ScoredPlayer = $ScoredPlayers/ScoredPlayer_O as ScoredPlayer
 
 @onready var mark_0_0: Mark = $Grid/Mark_0_0 as Mark
 @onready var mark_0_1: Mark = $Grid/Mark_0_1 as Mark
@@ -34,11 +34,9 @@ const THIRD_VERTICAL_WIN_POSITION: int = 6
 const FALLING_DIAGONAL_WIN_POSITION: int = 7
 const RISING_DIAGONAL_WIN_POSITION: int = 8
 
-var player_value: String = "~"
+var active_scored_player: ScoredPlayer
 
 func _ready() -> void:
-	print("Grid:_ready")
-	
 	_change_active_player()
 	
 	mark_0_0.mark_pressed.connect(_on_mark_pressed)
@@ -54,37 +52,40 @@ func _ready() -> void:
 	mark_2_2.mark_pressed.connect(_on_mark_pressed)
 	
 func _on_mark_pressed(mark: Mark) -> void:
-	mark.active(player_value)
+	mark.active(active_scored_player.player_name)
 	
 	var last_win_position: int = _get_player_win_positiion();
 	if last_win_position == NONE_WIN_POSITION:
 		_change_active_player()
-	elif last_win_position == FIRST_HORIZONTAL_WIN_POSITION:
-		match_line_first_horizontal.visible = true
-	elif last_win_position == SECOND_HORIZONTAL_WIN_POSITION:
-		match_line_second_horizontal.visible = true
-	elif last_win_position == THIRD_HORIZONTAL_WIN_POSITION:
-		match_line_third_horizontal.visible = true
-	elif last_win_position == FISRT_VERTICAL_WIN_POSITION:
-		match_line_first_vertical.visible = true
-	elif last_win_position == SECOND_VERTICALL_WIN_POSITION:
-		match_line_second_vertical.visible = true
-	elif last_win_position == THIRD_VERTICAL_WIN_POSITION:
-		match_line_third_vertical.visible = true
-	elif last_win_position == FALLING_DIAGONAL_WIN_POSITION:
-		match_line_falling_diagonal.visible = true
-	elif last_win_position == RISING_DIAGONAL_WIN_POSITION:
-		match_line_rising_diagonal.visible = true
+	else:
+		active_scored_player.plus_one_score()
+		
+		if last_win_position == FIRST_HORIZONTAL_WIN_POSITION:
+			match_line_first_horizontal.visible = true
+		elif last_win_position == SECOND_HORIZONTAL_WIN_POSITION:
+			match_line_second_horizontal.visible = true
+		elif last_win_position == THIRD_HORIZONTAL_WIN_POSITION:
+			match_line_third_horizontal.visible = true
+		elif last_win_position == FISRT_VERTICAL_WIN_POSITION:
+			match_line_first_vertical.visible = true
+		elif last_win_position == SECOND_VERTICALL_WIN_POSITION:
+			match_line_second_vertical.visible = true
+		elif last_win_position == THIRD_VERTICAL_WIN_POSITION:
+			match_line_third_vertical.visible = true
+		elif last_win_position == FALLING_DIAGONAL_WIN_POSITION:
+			match_line_falling_diagonal.visible = true
+		elif last_win_position == RISING_DIAGONAL_WIN_POSITION:
+			match_line_rising_diagonal.visible = true
 	
 func _change_active_player() -> void:
-	if player_value == local_player_x.text:
-		local_player_x.deactive()
-		local_player_o.active()
-		player_value = local_player_o.text
+	if active_scored_player && active_scored_player.player_name == scored_player_x.player_name:
+		scored_player_x.deactive()
+		scored_player_o.active()
+		active_scored_player = scored_player_o
 	else:
-		local_player_x.active()
-		local_player_o.deactive()
-		player_value = local_player_x.text
+		scored_player_x.active()
+		scored_player_o.deactive()
+		active_scored_player = scored_player_x
 		
 func _get_player_win_positiion() -> int:
 	if _is_same_value(mark_0_0, mark_0_1, mark_0_2):

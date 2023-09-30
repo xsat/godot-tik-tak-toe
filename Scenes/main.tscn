@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://bdreujlyd6lhl" path="res://Assets/background.jpg" id="1_7a1qm"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_o5ruw"]
-[ext_resource type="PackedScene" uid="uid://dw60hx1uwwuko" path="res://Scenes/local_player.tscn" id="3_pwbqm"]
 [ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="4_fu44m"]
 [ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="5_7so0w"]
+[ext_resource type="PackedScene" uid="uid://c084tq3eipn1m" path="res://Scenes/scored_player.tscn" id="5_fmmbs"]
 [ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="6_0dqct"]
 
 [node name="Main" type="Node"]
@@ -15,21 +15,15 @@ script = ExtResource("1_o5ruw")
 [node name="background" type="Sprite2D" parent="main_camera"]
 texture = ExtResource("1_7a1qm")
 
-[node name="LocalPlayers" type="Node" parent="."]
+[node name="ScoredPlayers" type="Node2D" parent="."]
 
-[node name="LocalPlayer_O" parent="LocalPlayers" instance=ExtResource("3_pwbqm")]
-offset_left = 120.0
-offset_top = -368.0
-offset_right = 195.0
-offset_bottom = -290.0
-text = "O"
+[node name="ScoredPlayer_X" parent="ScoredPlayers" instance=ExtResource("5_fmmbs")]
+position = Vector2(-208, -368)
+player_name = "X"
 
-[node name="LocalPlayer_X" parent="LocalPlayers" instance=ExtResource("3_pwbqm")]
-offset_left = -168.0
-offset_top = -368.0
-offset_right = -93.0
-offset_bottom = -290.0
-text = "X"
+[node name="ScoredPlayer_O" parent="ScoredPlayers" instance=ExtResource("5_fmmbs")]
+position = Vector2(120, -368)
+player_name = "O"
 
 [node name="Grid" type="Sprite2D" parent="."]
 texture = ExtResource("5_7so0w")

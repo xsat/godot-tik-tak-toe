@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://c084tq3eipn1m"]
+
+[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="1_58h1j"]
+[ext_resource type="Script" path="res://Scenes/scored_player.gd" id="1_uuvab"]
+
+[sub_resource type="Animation" id="Animation_tfe5u"]
+resource_name = "activate"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("score:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.498039), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uyok8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("score:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_760aa"]
+resource_name = "deactivate"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("player:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("score:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.498039)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsbxy"]
+_data = {
+"RESET": SubResource("Animation_uyok8"),
+"activate": SubResource("Animation_tfe5u"),
+"deactivate": SubResource("Animation_760aa")
+}
+
+[node name="ScoredPlayer" type="Node2D"]
+script = ExtResource("1_uuvab")
+
+[node name="player" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_58h1j")
+theme_override_font_sizes/font_size = 100
+text = "~"
+
+[node name="score" type="Label" parent="."]
+offset_top = 136.0
+offset_right = 50.0
+offset_bottom = 189.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_58h1j")
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="animation" type="AnimationPlayer" parent="."]
+autoplay = "deactivate"
+libraries = {
+"": SubResource("AnimationLibrary_vsbxy")
+}
