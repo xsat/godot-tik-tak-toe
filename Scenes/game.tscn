@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5oa2qheu8a3p"]
+
+[ext_resource type="Script" path="res://Scenes/game.gd" id="1_t1kag"]
+[ext_resource type="PackedScene" uid="uid://dfm5qskstwc8r" path="res://Scenes/base.tscn" id="2_us1oc"]
+[ext_resource type="PackedScene" uid="uid://c084tq3eipn1m" path="res://Scenes/scored_player.tscn" id="3_244o2"]
+[ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="4_3qtn8"]
+[ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="5_0mjs1"]
+[ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="6_clcg4"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_t1kag")
+
+[node name="Base" parent="." instance=ExtResource("2_us1oc")]
+
+[node name="ScoredPlayers" type="Node2D" parent="."]
+
+[node name="ScoredPlayer_X" parent="ScoredPlayers" instance=ExtResource("3_244o2")]
+position = Vector2(-208, -368)
+player_name = "X"
+
+[node name="ScoredPlayer_O" parent="ScoredPlayers" instance=ExtResource("3_244o2")]
+position = Vector2(120, -368)
+player_name = "O"
+
+[node name="Grid" type="Sprite2D" parent="."]
+texture = ExtResource("4_3qtn8")
+offset = Vector2(0, 100)
+
+[node name="Mark_0_0" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(-176, -72)
+
+[node name="Mark_0_1" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(-48, -72)
+y = 1
+
+[node name="Mark_0_2" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(88, -72)
+y = 2
+
+[node name="Mark_1_0" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(-176, 48)
+x = 1
+
+[node name="Mark_1_1" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(-48, 48)
+x = 1
+y = 1
+
+[node name="Mark_1_2" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(88, 48)
+x = 1
+y = 2
+
+[node name="Mark_2_0" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(-176, 168)
+x = 2
+
+[node name="Mark_2_1" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(-48, 168)
+x = 2
+y = 1
+
+[node name="Mark_2_2" parent="Grid" instance=ExtResource("5_0mjs1")]
+position = Vector2(88, 168)
+x = 2
+y = 2
+
+[node name="MatchLines" type="Node2D" parent="."]
+
+[node name="MatchLine_First_Horizontal" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(0, -8)
+
+[node name="MatchLine_Second_Horizontal" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(0, 96)
+
+[node name="MatchLine_Third_Horizontal" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(8, 208)
+
+[node name="MatchLine_First_Vertical" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(-120, 112)
+rotation = 1.5708
+
+[node name="MatchLine_Second_Vertical" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(8, 120)
+rotation = 1.5708
+
+[node name="MatchLine_Third_Vertical" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(144, 112)
+rotation = 1.5708
+
+[node name="MatchLine_Falling_Diagonal" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(16, 104)
+rotation = 0.785398
+
+[node name="MatchLine_Rising_Diagonal" parent="MatchLines" instance=ExtResource("6_clcg4")]
+visible = false
+position = Vector2(-3.8147e-06, 112)
+rotation = 2.35619

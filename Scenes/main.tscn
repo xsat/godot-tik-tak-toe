@@ -1,108 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtapwlv0uet0a"]
+[gd_scene load_steps=4 format=3 uid="uid://dtapwlv0uet0a"]
 
-[ext_resource type="Texture2D" uid="uid://bdreujlyd6lhl" path="res://Assets/background.jpg" id="1_7a1qm"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_o5ruw"]
-[ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="4_fu44m"]
-[ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="5_7so0w"]
-[ext_resource type="PackedScene" uid="uid://c084tq3eipn1m" path="res://Scenes/scored_player.tscn" id="5_fmmbs"]
-[ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="6_0dqct"]
+[ext_resource type="PackedScene" uid="uid://dfm5qskstwc8r" path="res://Scenes/base.tscn" id="2_o8yxs"]
+[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="3_hc6ru"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_o5ruw")
 
-[node name="main_camera" type="Camera2D" parent="."]
+[node name="Base" parent="." instance=ExtResource("2_o8yxs")]
 
-[node name="background" type="Sprite2D" parent="main_camera"]
-texture = ExtResource("1_7a1qm")
+[node name="menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -88.0
+offset_right = 216.0
+offset_bottom = 96.0
 
-[node name="ScoredPlayers" type="Node2D" parent="."]
+[node name="new_game" type="Button" parent="menu"]
+offset_right = 408.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("3_hc6ru")
+theme_override_font_sizes/font_size = 50
+text = "New Game"
 
-[node name="ScoredPlayer_X" parent="ScoredPlayers" instance=ExtResource("5_fmmbs")]
-position = Vector2(-208, -368)
-player_name = "X"
+[node name="continue" type="Button" parent="menu"]
+offset_top = 62.0
+offset_right = 408.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("3_hc6ru")
+theme_override_font_sizes/font_size = 50
+text = "Continue"
 
-[node name="ScoredPlayer_O" parent="ScoredPlayers" instance=ExtResource("5_fmmbs")]
-position = Vector2(120, -368)
-player_name = "O"
-
-[node name="Grid" type="Sprite2D" parent="."]
-texture = ExtResource("5_7so0w")
-offset = Vector2(0, 100)
-
-[node name="Mark_0_0" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(-176, -72)
-
-[node name="Mark_0_1" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(-48, -72)
-y = 1
-
-[node name="Mark_0_2" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(88, -72)
-y = 2
-
-[node name="Mark_1_0" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(-176, 48)
-x = 1
-
-[node name="Mark_1_1" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(-48, 48)
-x = 1
-y = 1
-
-[node name="Mark_1_2" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(88, 48)
-x = 1
-y = 2
-
-[node name="Mark_2_0" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(-176, 168)
-x = 2
-
-[node name="Mark_2_1" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(-48, 168)
-x = 2
-y = 1
-
-[node name="Mark_2_2" parent="Grid" instance=ExtResource("4_fu44m")]
-position = Vector2(88, 168)
-x = 2
-y = 2
-
-[node name="MatchLines" type="Node2D" parent="."]
-
-[node name="MatchLine_First_Horizontal" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(0, -8)
-
-[node name="MatchLine_Second_Horizontal" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(0, 96)
-
-[node name="MatchLine_Third_Horizontal" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(8, 208)
-
-[node name="MatchLine_First_Vertical" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(-120, 112)
-rotation = 1.5708
-
-[node name="MatchLine_Second_Vertical" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(8, 120)
-rotation = 1.5708
-
-[node name="MatchLine_Third_Vertical" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(144, 112)
-rotation = 1.5708
-
-[node name="MatchLine_Falling_Diagonal" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(16, 104)
-rotation = 0.785398
-
-[node name="MatchLine_Rising_Diagonal" parent="MatchLines" instance=ExtResource("6_0dqct")]
-visible = false
-position = Vector2(-3.8147e-06, 112)
-rotation = 2.35619
+[node name="exit" type="Button" parent="menu"]
+offset_top = 124.0
+offset_right = 408.0
+offset_bottom = 182.0
+theme_override_fonts/font = ExtResource("3_hc6ru")
+theme_override_font_sizes/font_size = 50
+text = "Exit"
