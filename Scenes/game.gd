@@ -51,6 +51,10 @@ func _ready() -> void:
 	mark_2_1.mark_pressed.connect(_on_mark_pressed)
 	mark_2_2.mark_pressed.connect(_on_mark_pressed)
 	
+func _physics_process(delta):
+	if Input.is_action_just_pressed("open_menu"):
+		get_tree().change_scene_to_file("res://Scenes/main.tscn")
+
 func _on_mark_pressed(mark: Mark) -> void:
 	mark.active(active_scored_player.player_name)
 	
