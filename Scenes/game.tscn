@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5oa2qheu8a3p"]
+[gd_scene load_steps=8 format=3 uid="uid://c5oa2qheu8a3p"]
 
 [ext_resource type="Script" path="res://Scenes/game.gd" id="1_t1kag"]
 [ext_resource type="PackedScene" uid="uid://dfm5qskstwc8r" path="res://Scenes/base.tscn" id="2_us1oc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="4_3qtn8"]
 [ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="5_0mjs1"]
 [ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="6_clcg4"]
+[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="7_jk8rw"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_t1kag")
@@ -21,6 +22,7 @@ player_name = "X"
 [node name="ScoredPlayer_O" parent="ScoredPlayers" instance=ExtResource("3_244o2")]
 position = Vector2(120, -368)
 player_name = "O"
+horizontal_alignment = 2
 
 [node name="Grid" type="Sprite2D" parent="."]
 texture = ExtResource("4_3qtn8")
@@ -91,3 +93,23 @@ rotation = 0.785398
 visible = false
 position = Vector2(-3.8147e-06, 112)
 rotation = 2.35619
+
+[node name="blur" type="ColorRect" parent="."]
+visible = false
+offset_left = -240.0
+offset_top = -400.0
+offset_right = 240.0
+offset_bottom = 400.0
+color = Color(0, 0, 0, 0.74902)
+
+[node name="continue" type="Button" parent="blur"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 696.0
+offset_right = 448.0
+offset_bottom = 754.0
+theme_override_fonts/font = ExtResource("7_jk8rw")
+theme_override_font_sizes/font_size = 50
+text = "Continue"
+
+[connection signal="pressed" from="blur/continue" to="." method="_on_continue_pressed"]

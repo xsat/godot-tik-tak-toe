@@ -24,6 +24,10 @@ class_name Game
 @onready var match_line_falling_diagonal: MatchLine = $MatchLines/MatchLine_Falling_Diagonal as MatchLine
 @onready var match_line_rising_diagonal: MatchLine = $MatchLines/MatchLine_Rising_Diagonal as MatchLine
 
+@onready var blur: ColorRect = $blur as ColorRect
+
+
+const DRAW_WIN_POSITION: int = -1
 const NONE_WIN_POSITION: int = 0
 const FIRST_HORIZONTAL_WIN_POSITION: int = 1
 const SECOND_HORIZONTAL_WIN_POSITION: int = 2
@@ -39,6 +43,7 @@ const GAME_SAVE_PATH: String = "user://game.save"
 var active_scored_player: ScoredPlayer
 
 static var is_need_to_reset: bool = false
+
 
 func _ready() -> void:
 	_change_active_player()
@@ -75,8 +80,6 @@ func _on_mark_pressed(mark: Mark) -> void:
 	if last_win_position == NONE_WIN_POSITION:
 		_change_active_player()
 	else:
-		active_scored_player.plus_one_score()
-		
 		if last_win_position == FIRST_HORIZONTAL_WIN_POSITION:
 			match_line_first_horizontal.visible = true
 		elif last_win_position == SECOND_HORIZONTAL_WIN_POSITION:
@@ -93,6 +96,11 @@ func _on_mark_pressed(mark: Mark) -> void:
 			match_line_falling_diagonal.visible = true
 		elif last_win_position == RISING_DIAGONAL_WIN_POSITION:
 			match_line_rising_diagonal.visible = true
+			
+		if last_win_position != DRAW_WIN_POSITION:
+			active_scored_player.plus_one_score()
+		
+		blur.visible = true
 	
 func _change_active_player() -> void:
 	if active_scored_player && active_scored_player.player_name == scored_player_x.player_name:
@@ -128,6 +136,11 @@ func _get_player_win_positiion() -> int:
 		
 	if _is_same_value(mark_2_0, mark_1_1, mark_0_2):
 		return RISING_DIAGONAL_WIN_POSITION
+		
+	if _is_makrs_used(mark_0_0, mark_0_1, mark_0_2):
+		if _is_makrs_used(mark_1_0, mark_1_1, mark_1_2):
+			if _is_makrs_used(mark_2_0, mark_2_1, mark_2_2):
+				return DRAW_WIN_POSITION
 		
 	return NONE_WIN_POSITION
 	
@@ -251,3 +264,27 @@ func load_dict(dict: Dictionary) -> void:
 		if match_lines.has("rising_diagonal"):
 			match_line_rising_diagonal.load_dict(match_lines.get("rising_diagonal") as Dictionary)
 			
+func _on_continue_pressed():
+	_change_active_player()
+	
+	match_line_first_horizontal.visible = false
+	match_line_second_horizontal.visible = false
+	match_line_third_horizontal.visible = false
+	match_line_first_vertical.visible = false
+	match_line_second_vertical.visible = false
+	match_line_third_vertical.visible = false
+	match_line_falling_diagonal.visible = false
+	match_line_rising_diagonal.visible = false
+	
+	mark_0_0.deactive()
+	mark_0_1.deactive()
+	mark_0_2.deactive()
+	mark_1_0.deactive()
+	mark_1_1.deactive()
+	mark_1_2.deactive()
+	mark_2_0.deactive()
+	mark_2_1.deactive()
+	mark_2_2.deactive()
+	
+	blur.visible = false
+	
