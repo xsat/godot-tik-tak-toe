@@ -13,6 +13,21 @@ class_name ScoredPlayer
 const _ACTIVE_WHITE_COLOR: Color = Color(255, 255, 255, 1.0)
 const _DEACTIVE_WHITE_COLOR: Color = Color(255, 255, 255, 0.5)
 
+func get_dict() -> Dictionary:
+	return {
+		"player_name": player_name,
+		"score_value": score_value
+	}
+
+func load_dict(dict: Dictionary) -> void:
+	if dict.has("player_name"):
+		player_name = dict.get("player_name")
+		player.text = player_name
+		
+	if dict.has("score_value"):
+		score_value = dict.get("score_value")
+		score.text = "%s" % score_value
+	
 func plus_one_score() -> void:
 	score_value += 1
 	score.text = "%s" % score_value
@@ -40,4 +55,5 @@ func _deactivate_label(deactivated_label: Label) -> void:
 func _ready() -> void:
 	player.text = player_name
 	score.text = "%s" % score_value
+	
 	

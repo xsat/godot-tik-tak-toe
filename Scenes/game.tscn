@@ -31,39 +31,27 @@ position = Vector2(-176, -72)
 
 [node name="Mark_0_1" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(-48, -72)
-y = 1
 
 [node name="Mark_0_2" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(88, -72)
-y = 2
 
 [node name="Mark_1_0" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(-176, 48)
-x = 1
 
 [node name="Mark_1_1" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(-48, 48)
-x = 1
-y = 1
 
 [node name="Mark_1_2" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(88, 48)
-x = 1
-y = 2
 
 [node name="Mark_2_0" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(-176, 168)
-x = 2
 
 [node name="Mark_2_1" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(-48, 168)
-x = 2
-y = 1
 
 [node name="Mark_2_2" parent="Grid" instance=ExtResource("5_0mjs1")]
 position = Vector2(88, 168)
-x = 2
-y = 2
 
 [node name="MatchLines" type="Node2D" parent="."]
 

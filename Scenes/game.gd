@@ -34,10 +34,14 @@ const THIRD_VERTICAL_WIN_POSITION: int = 6
 const FALLING_DIAGONAL_WIN_POSITION: int = 7
 const RISING_DIAGONAL_WIN_POSITION: int = 8
 
+const GAME_SAVE_PATH: String = "user://game.save"
+
 var active_scored_player: ScoredPlayer
 
 func _ready() -> void:
 	_change_active_player()
+#	_save()
+	_load()
 	
 	mark_0_0.mark_pressed.connect(_on_mark_pressed)
 	mark_0_1.mark_pressed.connect(_on_mark_pressed)
@@ -46,15 +50,17 @@ func _ready() -> void:
 	mark_1_0.mark_pressed.connect(_on_mark_pressed)
 	mark_1_1.mark_pressed.connect(_on_mark_pressed)
 	mark_1_2.mark_pressed.connect(_on_mark_pressed)
-
+	
 	mark_2_0.mark_pressed.connect(_on_mark_pressed)
 	mark_2_1.mark_pressed.connect(_on_mark_pressed)
 	mark_2_2.mark_pressed.connect(_on_mark_pressed)
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("open_menu"):
+		_save()
+		
 		get_tree().change_scene_to_file("res://Scenes/main.tscn")
-
+	
 func _on_mark_pressed(mark: Mark) -> void:
 	mark.active(active_scored_player.player_name)
 	
@@ -123,6 +129,118 @@ func _is_same_value(mark_a: Mark, mark_b: Mark, mark_c: Mark) -> bool:
 		return false
 	
 	return mark_a.text.text == mark_b.text.text and mark_b.text.text == mark_c.text.text
-
+	
 func _is_makrs_used(mark_a: Mark, mark_b: Mark, mark_c: Mark) -> bool:
 	return mark_a.text.visible && mark_b.text.visible && mark_c.text.visible
+	
+func _save() -> void:
+	var json_string: String = JSON.stringify(get_dict())
+	
+	var save_game_file: FileAccess = FileAccess.open(GAME_SAVE_PATH, FileAccess.WRITE)
+	save_game_file.store_line(json_string)
+	save_game_file.close()
+	
+func _load() -> void:
+	if FileAccess.file_exists(GAME_SAVE_PATH):
+		var save_game_file: FileAccess = FileAccess.open(GAME_SAVE_PATH, FileAccess.READ)
+		var saved_dict: Dictionary = JSON.parse_string(save_game_file.get_line()) as Dictionary
+		save_game_file.close()
+		
+		load_dict(saved_dict)
+	
+func get_dict() -> Dictionary:
+	return {
+		"player_scores": {
+			"x": scored_player_x.get_dict(),
+			"o": scored_player_o.get_dict(),
+		},
+		"marks": {
+			"0_0": mark_0_0.get_dict(),
+			"0_1": mark_0_1.get_dict(),
+			"0_2": mark_0_2.get_dict(),
+			"1_0": mark_1_0.get_dict(),
+			"1_1": mark_1_1.get_dict(),
+			"1_2": mark_1_2.get_dict(),
+			"2_0": mark_2_0.get_dict(),
+			"2_1": mark_2_1.get_dict(),
+			"2_2": mark_2_2.get_dict(),
+		},
+		"match_lines": {
+			"first_horizontal": match_line_first_horizontal.get_dict(),
+			"second_horizontal": match_line_second_horizontal.get_dict(),
+			"third_horizontal": match_line_third_horizontal.get_dict(),
+			"first_vertical": match_line_first_vertical.get_dict(),
+			"second_vertical": match_line_second_vertical.get_dict(),
+			"third_vertical": match_line_third_vertical.get_dict(),
+			"falling_diagonal": match_line_falling_diagonal.get_dict(),
+			"rising_diagonal": match_line_rising_diagonal.get_dict(),
+		},
+	}
+	
+func load_dict(dict: Dictionary) -> void:
+	if dict.has("player_scores"):
+		var player_scores: Dictionary = dict.get("player_scores") as Dictionary
+			
+		if player_scores.has("x"):
+			scored_player_x.load_dict(player_scores.get("x") as Dictionary)
+			
+		if player_scores.has("o"):
+			scored_player_o.load_dict(player_scores.get("o") as Dictionary)
+		
+	if dict.has("marks"):
+		var marks: Dictionary = dict.get("marks") as Dictionary
+		
+		if marks.has("0_0"):
+			mark_0_0.load_dict(marks.get("0_0") as Dictionary)
+			
+		if marks.has("0_1"):
+			mark_0_1.load_dict(marks.get("0_1") as Dictionary)
+			
+		if marks.has("0_2"):
+			mark_0_2.load_dict(marks.get("0_2") as Dictionary)
+			
+		if marks.has("1_0"):
+			mark_1_0.load_dict(marks.get("1_0") as Dictionary)
+			
+		if marks.has("1_1"):
+			mark_1_1.load_dict(marks.get("1_1") as Dictionary)
+			
+		if marks.has("1_2"):
+			mark_1_2.load_dict(marks.get("1_2") as Dictionary)
+			
+		if marks.has("2_0"):
+			mark_2_0.load_dict(marks.get("2_0") as Dictionary)
+			
+		if marks.has("2_1"):
+			mark_2_1.load_dict(marks.get("2_1") as Dictionary)
+			
+		if marks.has("2_2"):
+			mark_2_2.load_dict(marks.get("2_2") as Dictionary)
+			
+	if dict.has("match_lines"):
+		var match_lines: Dictionary = dict.get("match_lines") as Dictionary
+		
+		if match_lines.has("first_horizontal"):
+			match_line_first_horizontal.load_dict(match_lines.get("first_horizontal") as Dictionary)
+			
+		if match_lines.has("second_horizontal"):
+			match_line_second_horizontal.load_dict(match_lines.get("second_horizontal") as Dictionary)
+			
+		if match_lines.has("third_horizontal"):
+			match_line_third_horizontal.load_dict(match_lines.get("third_horizontal") as Dictionary)
+			
+		if match_lines.has("first_vertical"):
+			match_line_first_vertical.load_dict(match_lines.get("first_vertical") as Dictionary)
+			
+		if match_lines.has("second_vertical"):
+			match_line_second_vertical.load_dict(match_lines.get("second_vertical") as Dictionary)
+			
+		if match_lines.has("third_vertical"):
+			match_line_third_vertical.load_dict(match_lines.get("third_vertical") as Dictionary)
+			
+		if match_lines.has("falling_diagonal"):
+			match_line_falling_diagonal.load_dict(match_lines.get("falling_diagonal") as Dictionary)
+			
+		if match_lines.has("rising_diagonal"):
+			match_line_rising_diagonal.load_dict(match_lines.get("rising_diagonal") as Dictionary)
+			
