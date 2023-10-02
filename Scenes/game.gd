@@ -38,10 +38,17 @@ const GAME_SAVE_PATH: String = "user://game.save"
 
 var active_scored_player: ScoredPlayer
 
+static var is_need_to_reset: bool = false
+
 func _ready() -> void:
 	_change_active_player()
-#	_save()
-	_load()
+	
+	if is_need_to_reset:
+		is_need_to_reset = false
+		
+		_save()
+	else:
+		_load()
 	
 	mark_0_0.mark_pressed.connect(_on_mark_pressed)
 	mark_0_1.mark_pressed.connect(_on_mark_pressed)

@@ -3,6 +3,8 @@ extends Node
 class_name Main
 
 func _on_new_game_pressed():
+	Game.is_need_to_reset = true
+	
 	_load_game()
 	
 func _on_continue_pressed():
