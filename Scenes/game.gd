@@ -38,12 +38,6 @@ func _ready() -> void:
 	grid.connnect_to_mark_pressed(_on_mark_pressed)
 	blur.continue_pressed.connect(_on_continue_pressed)
 	
-func _physics_process(delta):
-	if Input.is_action_just_pressed("open_menu"):
-		saver.save_game(self)
-		
-		get_tree().change_scene_to_file("res://Scenes/main.tscn")
-	
 func _on_mark_pressed(mark: Mark) -> void:
 	mark.active(players.get_active_player_name())
 	
@@ -55,8 +49,15 @@ func _on_mark_pressed(mark: Mark) -> void:
 	else:
 		players.change_active_player()
 		
+	saver.save_game(self)
+		
 func _on_continue_pressed():
 	players.change_active_player()
 	
 	grid.reset()
 	blur.deactive()
+	
+	saver.save_game(self)
+	
+func _on_menu_pressed():
+	get_tree().change_scene_to_file("res://Scenes/main.tscn")
