@@ -40,33 +40,64 @@ position = Vector2(-48, 168)
 position = Vector2(88, 168)
 
 [node name="MatchLines" type="Node2D" parent="."]
+
+[node name="MatchLine_First_Horizontal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
 visible = false
-
-[node name="MatchLine_First_Horizontal" parent="MatchLines" instance=ExtResource("3_3qenx")]
 position = Vector2(0, -8)
+mark_a = NodePath("../../Marks/Mark_0_0")
+mark_b = NodePath("../../Marks/Mark_0_1")
+mark_c = NodePath("../../Marks/Mark_0_2")
 
-[node name="MatchLine_Second_Horizontal" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_Second_Horizontal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(0, 96)
+mark_a = NodePath("../../Marks/Mark_1_0")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_1_2")
 
-[node name="MatchLine_Third_Horizontal" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_Third_Horizontal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(8, 208)
+mark_a = NodePath("../../Marks/Mark_2_0")
+mark_b = NodePath("../../Marks/Mark_2_1")
+mark_c = NodePath("../../Marks/Mark_2_2")
 
-[node name="MatchLine_First_Vertical" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_First_Vertical" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(-120, 112)
 rotation = 1.5708
+mark_a = NodePath("../../Marks/Mark_0_0")
+mark_b = NodePath("../../Marks/Mark_1_0")
+mark_c = NodePath("../../Marks/Mark_2_0")
 
-[node name="MatchLine_Second_Vertical" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_Second_Vertical" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(8, 120)
 rotation = 1.5708
+mark_a = NodePath("../../Marks/Mark_0_1")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_2_1")
 
-[node name="MatchLine_Third_Vertical" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_Third_Vertical" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(144, 112)
 rotation = 1.5708
+mark_a = NodePath("../../Marks/Mark_0_2")
+mark_b = NodePath("../../Marks/Mark_1_2")
+mark_c = NodePath("../../Marks/Mark_2_2")
 
-[node name="MatchLine_Falling_Diagonal" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_Falling_Diagonal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(16, 104)
 rotation = 0.785398
+mark_a = NodePath("../../Marks/Mark_0_0")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_2_2")
 
-[node name="MatchLine_Rising_Diagonal" parent="MatchLines" instance=ExtResource("3_3qenx")]
+[node name="MatchLine_Rising_Diagonal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
 position = Vector2(-3.8147e-06, 112)
 rotation = 2.35619
+mark_a = NodePath("../../Marks/Mark_2_0")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_0_2")

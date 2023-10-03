@@ -11,7 +11,7 @@ func _ready():
 		"1_0": $Marks/Mark_1_0, "1_1": $Marks/Mark_1_1, "1_2": $Marks/Mark_1_1,
 		"2_0": $Marks/Mark_2_0, "2_1": $Marks/Mark_2_1, "2_2": $Marks/Mark_2_2,
 	}
-
+	
 	_match_lines = {
 		"first_horizontal": $MatchLines/MatchLine_First_Horizontal,
 		"second_horizontal": $MatchLines/MatchLine_Second_Horizontal,
@@ -22,7 +22,31 @@ func _ready():
 		"falling_diagonal": $MatchLines/MatchLine_Falling_Diagonal,
 		"rising_diagonal": $MatchLines/MatchLine_Rising_Diagonal,
 	}
+	
+func connnect_to_mark_pressed(callable: Callable) -> void:
+	for key in _marks:
+		var mark: Mark = _marks[key]
+		
+		_marks[key].mark_pressed.connect(callable)
 
+func is_all_marks_used() -> bool:
+	var first_horizontal: MatchLine = _match_lines["first_horizontal"]
+	var second_horizontal: MatchLine = _match_lines["second_horizontal"]
+	var third_horizontal: MatchLine = _match_lines["third_horizontal"]
+	
+	return first_horizontal.is_marks_used() && second_horizontal.is_marks_used() && third_horizontal.is_marks_used()
+	
+func is_shown_win_match_line() -> bool:
+	for key in _match_lines:
+		var match_line: MatchLine = _match_lines[key]
+		
+		if match_line.is_marks_used() && match_line.is_same_values():
+			match_line.visible = true
+			
+			return true
+				
+	return false
+	
 func reset() -> void:
 	for key in _match_lines:
 		_match_lines[key].visible = false
@@ -32,15 +56,17 @@ func reset() -> void:
 	
 func get_dict() -> Dictionary:
 	var dict: Dictionary = {
-		"marks": [],
-		"match_lines": [],
+		"marks": {},
+		"match_lines": {},
 	}
 	
 	for key in _marks:
-		dict["marks"][key].get_dict()
+		var mark: Mark = _marks[key]
+		dict["marks"][key] = mark.get_dict()
 	
 	for key in _match_lines:
-		dict["match_lines"][key].get_dict()
+		var match_line: MatchLine = _match_lines[key]
+		dict["match_lines"][key] = match_line.get_dict()
 	
 	return dict
 	
