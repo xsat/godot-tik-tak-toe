@@ -2,15 +2,11 @@ extends Node
 
 class_name Game
 
-@onready var scored_player_x: ScoredPlayer = $ScoredPlayers/ScoredPlayer_X as ScoredPlayer
-@onready var scored_player_o: ScoredPlayer = $ScoredPlayers/ScoredPlayer_O as ScoredPlayer
-
+@onready var players: Players = $Players as Players
 @onready var grid: Grid = $Grid as Grid
 @onready var blur: Blur = $Blur as Blur
 
 const GAME_SAVE_PATH: String = "user://game.save"
-
-var active_scored_player: ScoredPlayer
 
 static var is_need_to_reset: bool = false
 
@@ -22,8 +18,7 @@ func _ready() -> void:
 	else:
 		_load()
 		
-	_detect_active_player()
-	
+	players.detect_active_player()
 	grid.connnect_to_mark_pressed(_on_mark_pressed)
 	blur.continue_pressed.connect(_on_continue_pressed)
 	
@@ -34,42 +29,22 @@ func _physics_process(delta):
 		get_tree().change_scene_to_file("res://Scenes/main.tscn")
 	
 func _on_mark_pressed(mark: Mark) -> void:
-	mark.active(active_scored_player.player_name)
+	mark.active(players.get_active_player_name())
 	
 	if grid.is_all_marks_used():
 		blur.active()
 	elif grid.is_shown_win_match_line():
-		active_scored_player.plus_one_score()
+		players.plus_one_score_to_active_player()
 		blur.active()
 	else:
-		_change_active_player()
+		players.change_active_player()
 		
 func _on_continue_pressed():
-	_change_active_player()
+	players.change_active_player()
 	
 	grid.reset()
 	blur.deactive()
 	
-func _detect_active_player() -> void:
-	if scored_player_o.is_player_active:
-		active_scored_player = scored_player_o
-		scored_player_x.deactive()
-		scored_player_o.active()
-	else:
-		active_scored_player = scored_player_x
-		scored_player_x.active()
-		scored_player_o.deactive()
-		
-func _change_active_player() -> void:
-	if active_scored_player && active_scored_player.player_name == scored_player_x.player_name:
-		scored_player_x.deactive()
-		scored_player_o.active()
-		active_scored_player = scored_player_o
-	else:
-		scored_player_x.active()
-		scored_player_o.deactive()
-		active_scored_player = scored_player_x
-		
 func _get_player_win_positiion() -> int:
 	return 0
 	
@@ -90,23 +65,14 @@ func _load() -> void:
 	
 func get_dict() -> Dictionary:
 	return {
-		"player_scores": {
-			"x": scored_player_x.get_dict(),
-			"o": scored_player_o.get_dict(),
-		},
+		"players": players.get_dict(),
 		"grid": grid.get_dict(),
 		"blur": blur.get_dict(),
 	}
 	
 func load_dict(dict: Dictionary) -> void:
-	if dict.has("player_scores"):
-		var player_scores: Dictionary = dict.get("player_scores") as Dictionary
-			
-		if player_scores.has("x"):
-			scored_player_x.load_dict(player_scores.get("x") as Dictionary)
-			
-		if player_scores.has("o"):
-			scored_player_o.load_dict(player_scores.get("o") as Dictionary)
+	if dict.has("players"):
+		players.load_dict(dict.get("players") as Dictionary)
 		
 	if dict.has("grid"):
 		grid.load_dict(dict.get("grid") as Dictionary)
