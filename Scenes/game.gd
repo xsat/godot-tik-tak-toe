@@ -46,14 +46,14 @@ static var is_need_to_reset: bool = false
 
 
 func _ready() -> void:
-	_change_active_player()
-	
 	if is_need_to_reset:
 		is_need_to_reset = false
 		
 		_save()
 	else:
 		_load()
+		
+	_detect_active_player()
 	
 	mark_0_0.mark_pressed.connect(_on_mark_pressed)
 	mark_0_1.mark_pressed.connect(_on_mark_pressed)
@@ -101,7 +101,17 @@ func _on_mark_pressed(mark: Mark) -> void:
 			active_scored_player.plus_one_score()
 		
 		blur.visible = true
-	
+		
+func _detect_active_player() -> void:
+	if scored_player_o.is_player_active:
+		active_scored_player = scored_player_o
+		scored_player_x.deactive()
+		scored_player_o.active()
+	else:
+		active_scored_player = scored_player_x
+		scored_player_x.active()
+		scored_player_o.deactive()
+		
 func _change_active_player() -> void:
 	if active_scored_player && active_scored_player.player_name == scored_player_x.player_name:
 		scored_player_x.deactive()
@@ -170,6 +180,7 @@ func _load() -> void:
 	
 func get_dict() -> Dictionary:
 	return {
+		"is_blur_visible": blur.visible,
 		"player_scores": {
 			"x": scored_player_x.get_dict(),
 			"o": scored_player_o.get_dict(),
@@ -198,6 +209,9 @@ func get_dict() -> Dictionary:
 	}
 	
 func load_dict(dict: Dictionary) -> void:
+	if dict.has("is_blur_visible"):
+		blur.visible = dict.get("is_blur_visible") as bool
+		
 	if dict.has("player_scores"):
 		var player_scores: Dictionary = dict.get("player_scores") as Dictionary
 			

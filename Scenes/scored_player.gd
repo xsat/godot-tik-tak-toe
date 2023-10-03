@@ -19,7 +19,8 @@ const _DEACTIVE_WHITE_COLOR: Color = Color(255, 255, 255, 0.5)
 func get_dict() -> Dictionary:
 	return {
 		"player_name": player_name,
-		"score_value": score_value
+		"is_player_active": is_player_active,
+		"score_value": score_value,
 	}
 
 func load_dict(dict: Dictionary) -> void:
