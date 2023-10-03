@@ -8,7 +8,7 @@ var _match_lines: Dictionary
 func _ready():
 	_marks = {
 		"0_0": $Marks/Mark_0_0, "0_1": $Marks/Mark_0_1, "0_2": $Marks/Mark_0_2,
-		"1_0": $Marks/Mark_1_0, "1_1": $Marks/Mark_1_1, "1_2": $Marks/Mark_1_1,
+		"1_0": $Marks/Mark_1_0, "1_1": $Marks/Mark_1_1, "1_2": $Marks/Mark_1_2,
 		"2_0": $Marks/Mark_2_0, "2_1": $Marks/Mark_2_1, "2_2": $Marks/Mark_2_2,
 	}
 	
@@ -27,7 +27,7 @@ func connnect_to_mark_pressed(callable: Callable) -> void:
 	for key in _marks:
 		var mark: Mark = _marks[key]
 		
-		_marks[key].mark_pressed.connect(callable)
+		mark.mark_pressed.connect(callable)
 
 func is_all_marks_used() -> bool:
 	var first_horizontal: MatchLine = _match_lines["first_horizontal"]

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dfm5qskstwc8r" path="res://Scenes/base.tscn" id="2_us1oc"]
 [ext_resource type="PackedScene" uid="uid://c084tq3eipn1m" path="res://Scenes/scored_player.tscn" id="3_244o2"]
 [ext_resource type="PackedScene" uid="uid://c4goe3k0dle6m" path="res://Scenes/grid.tscn" id="4_2q5ka"]
-[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="7_jk8rw"]
+[ext_resource type="PackedScene" uid="uid://c5slp8x0mr7t7" path="res://Scenes/blur.tscn" id="5_pf65w"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_t1kag")
@@ -24,22 +24,4 @@ horizontal_alignment = 2
 
 [node name="Grid" parent="." instance=ExtResource("4_2q5ka")]
 
-[node name="blur" type="ColorRect" parent="."]
-visible = false
-offset_left = -240.0
-offset_top = -400.0
-offset_right = 240.0
-offset_bottom = 400.0
-color = Color(0, 0, 0, 0.74902)
-
-[node name="continue" type="Button" parent="blur"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 696.0
-offset_right = 448.0
-offset_bottom = 754.0
-theme_override_fonts/font = ExtResource("7_jk8rw")
-theme_override_font_sizes/font_size = 50
-text = "Continue"
-
-[connection signal="pressed" from="blur/continue" to="." method="_on_continue_pressed"]
+[node name="Blur" parent="." instance=ExtResource("5_pf65w")]

@@ -32,7 +32,3 @@ func active(new_value: String) -> void:
 func deactive() -> void:
 	text.text = _DEFAULT_TEXT
 	text.visible = false
-
-
-func _on_mark_pressed(mark):
-	pass # Replace with function body.

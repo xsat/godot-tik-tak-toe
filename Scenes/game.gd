@@ -6,8 +6,7 @@ class_name Game
 @onready var scored_player_o: ScoredPlayer = $ScoredPlayers/ScoredPlayer_O as ScoredPlayer
 
 @onready var grid: Grid = $Grid as Grid
-
-@onready var blur: ColorRect = $blur as ColorRect
+@onready var blur: Blur = $Blur as Blur
 
 const GAME_SAVE_PATH: String = "user://game.save"
 
@@ -26,6 +25,7 @@ func _ready() -> void:
 	_detect_active_player()
 	
 	grid.connnect_to_mark_pressed(_on_mark_pressed)
+	blur.continue_pressed.connect(_on_continue_pressed)
 	
 func _physics_process(delta):
 	if Input.is_action_just_pressed("open_menu"):
@@ -36,15 +36,20 @@ func _physics_process(delta):
 func _on_mark_pressed(mark: Mark) -> void:
 	mark.active(active_scored_player.player_name)
 	
-	var last_win_position: int = _get_player_win_positiion();
-	
-	if grid.is_shown_win_match_line():
+	if grid.is_all_marks_used():
+		blur.active()
+	elif grid.is_shown_win_match_line():
 		active_scored_player.plus_one_score()
-	elif grid.is_all_marks_used():
-		blur.visible = true
+		blur.active()
 	else:
 		_change_active_player()
 		
+func _on_continue_pressed():
+	_change_active_player()
+	
+	grid.reset()
+	blur.deactive()
+	
 func _detect_active_player() -> void:
 	if scored_player_o.is_player_active:
 		active_scored_player = scored_player_o
@@ -85,18 +90,15 @@ func _load() -> void:
 	
 func get_dict() -> Dictionary:
 	return {
-		"is_blur_visible": blur.visible,
 		"player_scores": {
 			"x": scored_player_x.get_dict(),
 			"o": scored_player_o.get_dict(),
 		},
 		"grid": grid.get_dict(),
+		"blur": blur.get_dict(),
 	}
 	
 func load_dict(dict: Dictionary) -> void:
-	if dict.has("is_blur_visible"):
-		blur.visible = dict.get("is_blur_visible") as bool
-		
 	if dict.has("player_scores"):
 		var player_scores: Dictionary = dict.get("player_scores") as Dictionary
 			
@@ -107,12 +109,8 @@ func load_dict(dict: Dictionary) -> void:
 			scored_player_o.load_dict(player_scores.get("o") as Dictionary)
 		
 	if dict.has("grid"):
-		grid.load_dict(dict.get("grid")  as Dictionary)
-	
-func _on_continue_pressed():
-	_change_active_player()
-	
-	grid.reset()
-	
-	blur.visible = false
+		grid.load_dict(dict.get("grid") as Dictionary)
+		
+	if dict.has("blur"):
+		blur.load_dict(dict.get("blur") as Dictionary)
 	
