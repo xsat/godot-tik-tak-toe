@@ -2,114 +2,33 @@
 
 [ext_resource type="Script" path="res://Scenes/game.gd" id="1_t1kag"]
 [ext_resource type="PackedScene" uid="uid://dfm5qskstwc8r" path="res://Scenes/base.tscn" id="2_us1oc"]
-[ext_resource type="PackedScene" uid="uid://c084tq3eipn1m" path="res://Scenes/scored_player.tscn" id="3_244o2"]
-[ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="4_3qtn8"]
-[ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="5_0mjs1"]
-[ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="6_clcg4"]
-[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="7_jk8rw"]
+[ext_resource type="PackedScene" uid="uid://bg2l27qomc17x" path="res://Scenes/players.tscn" id="3_7qpci"]
+[ext_resource type="PackedScene" uid="uid://b7egjulqkx374" path="res://Scenes/saver.tscn" id="3_dq2qk"]
+[ext_resource type="PackedScene" uid="uid://c4goe3k0dle6m" path="res://Scenes/grid.tscn" id="4_2q5ka"]
+[ext_resource type="PackedScene" uid="uid://c5slp8x0mr7t7" path="res://Scenes/blur.tscn" id="5_pf65w"]
+[ext_resource type="FontFile" uid="uid://bxcphqmnsniav" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="7_clj8i"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_t1kag")
 
 [node name="Base" parent="." instance=ExtResource("2_us1oc")]
 
-[node name="ScoredPlayers" type="Node2D" parent="."]
+[node name="Saver" parent="." instance=ExtResource("3_dq2qk")]
 
-[node name="ScoredPlayer_X" parent="ScoredPlayers" instance=ExtResource("3_244o2")]
-position = Vector2(-208, -368)
-player_name = "X"
-
-[node name="ScoredPlayer_O" parent="ScoredPlayers" instance=ExtResource("3_244o2")]
-position = Vector2(120, -368)
-player_name = "O"
-horizontal_alignment = 2
-
-[node name="Grid" type="Sprite2D" parent="."]
-texture = ExtResource("4_3qtn8")
-offset = Vector2(0, 100)
-
-[node name="Mark_0_0" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(-176, -72)
-
-[node name="Mark_0_1" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(-48, -72)
-
-[node name="Mark_0_2" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(88, -72)
-
-[node name="Mark_1_0" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(-176, 48)
-
-[node name="Mark_1_1" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(-48, 48)
-
-[node name="Mark_1_2" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(88, 48)
-
-[node name="Mark_2_0" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(-176, 168)
-
-[node name="Mark_2_1" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(-48, 168)
-
-[node name="Mark_2_2" parent="Grid" instance=ExtResource("5_0mjs1")]
-position = Vector2(88, 168)
-
-[node name="MatchLines" type="Node2D" parent="."]
-
-[node name="MatchLine_First_Horizontal" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(0, -8)
-
-[node name="MatchLine_Second_Horizontal" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(0, 96)
-
-[node name="MatchLine_Third_Horizontal" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(8, 208)
-
-[node name="MatchLine_First_Vertical" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(-120, 112)
-rotation = 1.5708
-
-[node name="MatchLine_Second_Vertical" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(8, 120)
-rotation = 1.5708
-
-[node name="MatchLine_Third_Vertical" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(144, 112)
-rotation = 1.5708
-
-[node name="MatchLine_Falling_Diagonal" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(16, 104)
-rotation = 0.785398
-
-[node name="MatchLine_Rising_Diagonal" parent="MatchLines" instance=ExtResource("6_clcg4")]
-visible = false
-position = Vector2(-3.8147e-06, 112)
-rotation = 2.35619
-
-[node name="blur" type="ColorRect" parent="."]
-visible = false
+[node name="menu" type="Button" parent="."]
 offset_left = -240.0
-offset_top = -400.0
-offset_right = 240.0
-offset_bottom = 400.0
-color = Color(0, 0, 0, 0.74902)
+offset_top = 344.0
+offset_right = -176.0
+offset_bottom = 402.0
+theme_override_fonts/font = ExtResource("7_clj8i")
+theme_override_font_sizes/font_size = 35
+text = "="
+icon_alignment = 1
 
-[node name="continue" type="Button" parent="blur"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 696.0
-offset_right = 448.0
-offset_bottom = 754.0
-theme_override_fonts/font = ExtResource("7_jk8rw")
-theme_override_font_sizes/font_size = 50
-text = "Continue"
+[node name="Players" parent="." instance=ExtResource("3_7qpci")]
 
-[connection signal="pressed" from="blur/continue" to="." method="_on_continue_pressed"]
+[node name="Grid" parent="." instance=ExtResource("4_2q5ka")]
+
+[node name="Blur" parent="." instance=ExtResource("5_pf65w")]
+
+[connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]

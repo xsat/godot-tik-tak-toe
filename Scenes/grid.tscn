@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4goe3k0dle6m"]
+
+[ext_resource type="Script" path="res://Scenes/grid.gd" id="1_8sofd"]
+[ext_resource type="Texture2D" uid="uid://bqcwernbyoqpn" path="res://Assets/grid_body.png" id="2_vf0i8"]
+[ext_resource type="PackedScene" uid="uid://1veagyanobim" path="res://Scenes/mark.tscn" id="2_w2q7s"]
+[ext_resource type="PackedScene" uid="uid://bldf64kgx1myf" path="res://Scenes/match_line.tscn" id="3_3qenx"]
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_8sofd")
+
+[node name="Marks" type="Sprite2D" parent="."]
+texture = ExtResource("2_vf0i8")
+offset = Vector2(0, 100)
+
+[node name="Mark_0_0" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(-176, -72)
+
+[node name="Mark_0_1" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(-48, -72)
+
+[node name="Mark_0_2" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(88, -72)
+
+[node name="Mark_1_0" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(-176, 48)
+
+[node name="Mark_1_1" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(-48, 48)
+
+[node name="Mark_1_2" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(88, 48)
+
+[node name="Mark_2_0" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(-176, 168)
+
+[node name="Mark_2_1" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(-48, 168)
+
+[node name="Mark_2_2" parent="Marks" instance=ExtResource("2_w2q7s")]
+position = Vector2(88, 168)
+
+[node name="MatchLines" type="Node2D" parent="."]
+
+[node name="MatchLine_First_Horizontal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(0, -8)
+mark_a = NodePath("../../Marks/Mark_0_0")
+mark_b = NodePath("../../Marks/Mark_0_1")
+mark_c = NodePath("../../Marks/Mark_0_2")
+
+[node name="MatchLine_Second_Horizontal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(0, 96)
+mark_a = NodePath("../../Marks/Mark_1_0")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_1_2")
+
+[node name="MatchLine_Third_Horizontal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(8, 208)
+mark_a = NodePath("../../Marks/Mark_2_0")
+mark_b = NodePath("../../Marks/Mark_2_1")
+mark_c = NodePath("../../Marks/Mark_2_2")
+
+[node name="MatchLine_First_Vertical" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(-120, 112)
+rotation = 1.5708
+mark_a = NodePath("../../Marks/Mark_0_0")
+mark_b = NodePath("../../Marks/Mark_1_0")
+mark_c = NodePath("../../Marks/Mark_2_0")
+
+[node name="MatchLine_Second_Vertical" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(8, 120)
+rotation = 1.5708
+mark_a = NodePath("../../Marks/Mark_0_1")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_2_1")
+
+[node name="MatchLine_Third_Vertical" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(144, 112)
+rotation = 1.5708
+mark_a = NodePath("../../Marks/Mark_0_2")
+mark_b = NodePath("../../Marks/Mark_1_2")
+mark_c = NodePath("../../Marks/Mark_2_2")
+
+[node name="MatchLine_Falling_Diagonal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(16, 104)
+rotation = 0.785398
+mark_a = NodePath("../../Marks/Mark_0_0")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_2_2")
+
+[node name="MatchLine_Rising_Diagonal" parent="MatchLines" node_paths=PackedStringArray("mark_a", "mark_b", "mark_c") instance=ExtResource("3_3qenx")]
+visible = false
+position = Vector2(-3.8147e-06, 112)
+rotation = 2.35619
+mark_a = NodePath("../../Marks/Mark_2_0")
+mark_b = NodePath("../../Marks/Mark_1_1")
+mark_c = NodePath("../../Marks/Mark_0_2")
