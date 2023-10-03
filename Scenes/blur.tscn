@@ -15,6 +15,7 @@ offset_bottom = 400.0
 color = Color(0, 0, 0, 0.74902)
 
 [node name="continue" type="Button" parent="backgroud"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 696.0
 offset_right = 448.0
